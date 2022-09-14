@@ -1,4 +1,4 @@
-create or replace procedure P_BI_896_4V2
+create or replace procedure PROCEDURE1
 (
     file_to_load_username varchar2,
     E_START_DATE  DATE,
@@ -70,9 +70,9 @@ if i != 0 then
     and pp.order_action_id = a.order_unit_id(+)
     and pp.item_def_id = n.cid(+)
     and pp.item_def_ver = n.pcversion_id(+)
-    and ti.start_date between to_date(RP_BI_896_4V2.E_START_DATE,'dd.mm.yyyy') and to_date(RP_BI_896_4V2.E_END_DATE,'dd.mm.yyyy')+1-1/86400
-    and pp.start_date between to_date(RP_BI_896_4V2.E_START_DATE,'dd.mm.yyyy') and to_date(RP_BI_896_4V2.E_END_DATE,'dd.mm.yyyy')+1-1/86400
-    and a.ctdb_cre_datetime between to_date(RP_BI_896_4V2.E_START_DATE,'dd.mm.yyyy') and to_date(RP_BI_896_4V2.E_END_DATE,'dd.mm.yyyy')+1-1/86400
+    and ti.start_date between to_date(PROCEDURE1.E_START_DATE,'dd.mm.yyyy') and to_date(PROCEDURE1.E_END_DATE,'dd.mm.yyyy')+1-1/86400
+    and pp.start_date between to_date(PROCEDURE1.E_START_DATE,'dd.mm.yyyy') and to_date(PROCEDURE1.E_END_DATE,'dd.mm.yyyy')+1-1/86400
+    and a.ctdb_cre_datetime between to_date(PROCEDURE1.E_START_DATE,'dd.mm.yyyy') and to_date(PROCEDURE1.E_END_DATE,'dd.mm.yyyy')+1-1/86400
     and upper(a.creator_id) = upper(x.s1)
     and lower(n.name_text) in (
                           'service 1',
@@ -109,8 +109,8 @@ for rec in (
     
   where s.event_logs_id = p.event_logs_id
     and s.owner_id = m.subs_id
-    and p.eventtime between to_date(RP_BI_896_4V2.E_START_DATE,'dd.mm.yyyy') and to_date(RP_BI_896_4V2.E_END_DATE,'dd.mm.yyyy')+1-1/86400
-    and s.eventtime between to_date(RP_BI_896_4V2.E_START_DATE,'dd.mm.yyyy') and to_date(RP_BI_896_4V2.E_END_DATE,'dd.mm.yyyy')+1-1/86400
+    and p.eventtime between to_date(PROCEDURE1.E_START_DATE,'dd.mm.yyyy') and to_date(PROCEDURE1.E_END_DATE,'dd.mm.yyyy')+1-1/86400
+    and s.eventtime between to_date(PROCEDURE1.E_START_DATE,'dd.mm.yyyy') and to_date(PROCEDURE1.E_END_DATE,'dd.mm.yyyy')+1-1/86400
     and upper(s.username) = upper(x.s1)
     nd lower(p.value) like '%service%'
          
@@ -135,4 +135,4 @@ exception
     Err_Msg := Substr(SqlErrM, 1, 300);
     Err_Code := SqlCode;
    Rollback;
-end P_BI_896_4V2;
+end PROCEDURE1;
