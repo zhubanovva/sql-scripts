@@ -1,0 +1,48 @@
+INSERT OVERWRITE TABLE db_name.agg_daily
+PARTITION(`date`='${date}')
+SELECT 
+a.imei,
+a.subs_no,
+a.device_type,
+a.server_ip,
+sum(count_session) as count_session,
+sum(session_duration) as session_duration,
+a.flag_ind,
+a.sat_type,
+a.Protocol_Category,
+a.`Application`,
+a.Sub_Application,
+a.EGN_Sub_Protocol, 
+a.destination_name, 
+a.technology,
+a.lac, 
+a.ci,
+a.lan_rtt, 
+a.dp_rtt,
+a.url_category_id, 
+a.url_sub_category_id, 
+a.use_agent,
+concat_ws(',',COLLECT_SET(substr(dt,12,2))) as hours_list
+FROM db_name.agg_hourly a
+WHERE  `date` = '${date}'
+GROUP BY  
+a.imei,
+a.subs_no,
+a.device_type,
+a.server_ip,
+a.flag_ind,
+a.sat_type,
+a.Protocol_Category,
+a.`Application`,
+a.Sub_Application,
+a.EGN_Sub_Protocol, 
+a.destination_name, 
+a.technology,
+a.lac, 
+a.ci,
+a.lan_rtt, 
+a.dp_rtt,
+a.url_category_id, 
+a.url_sub_category_id, 
+a.use_agent,
+`date`;
